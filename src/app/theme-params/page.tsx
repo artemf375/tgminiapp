@@ -4,9 +4,12 @@ import { useThemeParams } from '@telegram-apps/sdk-react';
 import { List } from '@telegram-apps/telegram-ui';
 
 import { DisplayData } from '@/components/DisplayData/DisplayData';
+import BackButton from '@/components/BackButton/BackButton';
 
 export default function ThemeParamsPage() {
   const themeParams = useThemeParams();
+
+  const backButton = BackButton();
 
   return (
     <List>

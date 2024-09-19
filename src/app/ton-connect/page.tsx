@@ -16,10 +16,13 @@ import {
 import { DisplayData } from '@/components/DisplayData/DisplayData';
 
 import './styles.css';
+import BackButton from '@/components/BackButton/BackButton';
 
 export default function TONConnectPage() {
   const wallet = useTonWallet();
   const utils = useUtils();
+
+  const backButton = BackButton();
 
   if (!wallet) {
     return (
