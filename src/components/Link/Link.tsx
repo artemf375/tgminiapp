@@ -1,5 +1,5 @@
-import { useUtils, classNames } from '@telegram-apps/sdk-react';
-import { type FC, type MouseEventHandler, type JSX, useCallback } from 'react';
+import { useUtils, classNames, initNavigator, createBrowserNavigatorFromLocation, initHapticFeedback } from '@telegram-apps/sdk-react';
+import { type FC, type MouseEventHandler, type JSX, useCallback, useEffect } from 'react';
 import { type LinkProps as NextLinkProps, default as NextLink } from 'next/link';
 
 import './styles.css';
@@ -14,9 +14,17 @@ export const Link: FC<LinkProps> = ({
   ...rest
 }) => {
   const utils = useUtils();
+  const hapticFeedback = initHapticFeedback();
 
   const onClick = useCallback<MouseEventHandler<HTMLAnchorElement>>((e) => {
-    propsOnClick?.(e);
+    propsOnClick?.(e);    
+    hapticFeedback.impactOccurred('soft');
+
+    // navigator.push(href.toString());
+
+    // navigator.attach().then(() => {
+      
+    // })
 
     // Compute if target path is external. In this case we would like to open link using
     // TMA method.

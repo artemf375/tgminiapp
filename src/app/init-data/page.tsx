@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { useInitData, useLaunchParams, type User, useBackButton } from '@telegram-apps/sdk-react';
+import { useInitData, useLaunchParams, type User, useBackButton, createBrowserNavigatorFromLocation, initBackButton } from '@telegram-apps/sdk-react';
 import { List, Placeholder } from '@telegram-apps/telegram-ui';
 
 import { DisplayData, type DisplayDataRow } from '@/components/DisplayData/DisplayData';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useUtils } from '@telegram-apps/sdk-react';
+import { useInitData, useUtils } from '@telegram-apps/sdk-react';
 import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react';
 import {
   Avatar,
@@ -17,12 +17,27 @@ import { DisplayData } from '@/components/DisplayData/DisplayData';
 
 import './styles.css';
 import BackButton from '@/components/BackButton/BackButton';
+import { useEffect } from 'react';
+import { updateUserTONAddress } from '../server';
+import {Address} from "@ton/core";
 
 export default function TONConnectPage() {
   const wallet = useTonWallet();
   const utils = useUtils();
+  const initData = useInitData();
 
   const backButton = BackButton();
+
+  useEffect(() => {
+    if (wallet && initData?.user) {
+      const userId = initData.user.id;
+      const walletAddress = Address.parse(wallet.account.address);
+      updateUserTONAddress({
+        telegram_id: userId,
+        ton_address: walletAddress.toString(),
+      });
+    }
+  }, [wallet])
 
   if (!wallet) {
     return (
